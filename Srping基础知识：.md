@@ -2,6 +2,75 @@
 
 ##### 反射
 
+<u>关于java.lang.Class类的理解：</u>
+
+1.类的加载过程：
+
+程序经过javac.exe命令以后，会生成一个或多个字节码文件（.class结尾），接着我们使用java.exe的命令对某个字节码文件进行解释运行。相当于将某个字节码文件加载到内存中，此过程称为类的加载。**加载到内存中的类称为运行时类**，**此运行时类本身就作为Class的一个实例**。（按照java万物皆对象的理论，类也是一个对象）
+Class clazz = Person.class;（后面这部分就是这个Person类本身，Person是个类型，为了区分写法，加了个.class）
+
+2.换句话说，Class的实例就对应着一个运行时类。
+
+3.加载到内存中的运行时类，会缓存一定的时间，在此时间之内，我们可以通过不同的方式获取此运行时类（只有一个）。
+
+
+
+<u>获取Class的实例的方式：</u>
+
+**方式一：**调用运行时类的属性：.class
+Class<Person>  clazz = Person.class;（加上泛型之后避免后续需要强转）
+
+**方式二：**通过运行时类的对象，调用getClass()
+Person p1 = new Person();
+Class  clazz = p1.getClass();（拿到生成p1对象的类）
+
+★**方式三：**调用Class的静态方法：forName(String classPath)
+Class clazz = Class.forName(具体包.Person);（包含包名在内的类的完整路径称为全类名）（能够更好的体现动态性，运行时的动态性能）
+
+方式四：使用类的加载器：ClassLoader（了解即可）
+ClassLoader classLoader = 测试类.class.getClassLoader();
+Class clazz = classLoader.loadClass(具体包.Person);
+
+
+
+
+
+
+
+
+
+
+
+
+
+Class为反射的源头，
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 二、计算机网络知识
 
 第一章 浏览器生成消息
@@ -29,6 +98,8 @@ IP地址由一串32比特的数字组成，8比特为一组，转为十进制后
 消息先经过子网中的集线器，转发到最近的路由器，再传递到下一个路由器（通过集线器进行中转），最后由子网中的集线器传递给服务器。
 
 浏览器将服务器IP地址和消息委托给操作系统，操作系统根据IP地址将消息发送给服务器。
+
+
 
 ### 三、Spring基础知识
 
