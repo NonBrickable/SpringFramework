@@ -1,5 +1,58 @@
 ### 一、JavaSE知识
 
+##### IO流
+
+| 抽象基类 | 字节流(1字节-8bit) | 字符流(1字符(char)-16bit) |
+| :------: | :----------------: | :-----------------------: |
+|  输入流  |    InputStream     |          Reader           |
+|  输出流  |    OutputStream    |          Writer           |
+
+1.按照操作单位不同可以分为：字节流和字符流。
+字节流处理图片、视频等数据。
+字符流处理文本数据。
+
+2.按照数据的流向可以分为：输入流和输出流。
+
+3.按照流的角色不同可以分为：节点流和处理流。
+节点流——直接作用于文件上。
+处理流——作用于已有的流之上，作用是提升流的速度等等。
+
+| 抽象基类     | 节点流（或文件流） | 缓冲流（处理流的一种） |
+| ------------ | ------------------ | ---------------------- |
+| InputStream  | FileInputStream    | BufferedInputStream    |
+| OutputStream | FileOutputStream   | BufferedOutputStream   |
+| Reader       | FileReader         | BufferedReader         |
+| Writer       | FileWriter         | BufferedWriter         |
+
+
+
+<u>FileReader读入数据的基本操作</u>
+
+1.实例化File类的对象，指明要操作的文件
+File file = new File("文件路径");
+
+2.提供具体的流
+FileReader fr = new FileReader(file);
+
+3.数据的读入
+int data;
+while( (data = fr.read( ) ) != -1){
+System.out.print( (char) data);
+}
+
+4.关闭流
+**fr.close( );**
+
+**JVM自动垃圾回收机制对于物理连接，比如数据库连接、输入输出流、Socket连接无能为力，开启后需要手动关闭。同时，为了保证流资源一定可以执行关闭操作，需要采用try-catch-finally处理异常。**
+
+
+
+
+
+
+
+ 
+
 ##### 反射
 
 <u>关于java.lang.Class类的理解：</u>
@@ -30,6 +83,49 @@ Class clazz = Class.forName(具体包.Person);（包含包名在内的类的完�
 方式四：使用类的加载器：ClassLoader（了解即可）
 ClassLoader classLoader = 测试类.class.getClassLoader();
 Class clazz = classLoader.loadClass(具体包.Person);
+
+对于自定义类，使用系统类加载器进行加载。
+调用系统类加载器的getParent()：获取扩展类加载器。
+调用扩展类加载器的getParent()：无法获取引导类加载器。
+引导类加载器主要负责java的核心类库，无法加载自定义类的。
+
+
+
+<u>通过反射创建对应的运行时类的对象：</u>
+
+Class <Person>clazz = Person.class;
+
+Object obj = clazz.newInstance();创建Person类的对象。
+
+★Person obj = clazz.newInstance();因为前面加了泛型，所以创建的时候可以直接转为Person类的对象，造对象的时候都是用的构造器，只不过调用的形式不一样。
+
+
+
+<u>在javabean中要求提供一个public的空参构造器，原因是：</u>
+
+1.便于通过反射，创建运行时类的对象。
+
+2.便于子类继承此运行时类时，默认调用super()时，保证父类有此构造器。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -73,7 +169,7 @@ Class为反射的源头，
 
 ## 二、计算机网络知识
 
-第一章 浏览器生成消息
+##### 第一章 Web浏览器
 
 ##### 1.输入URL，浏览器解析网址，生成请求消息（告诉要服务器做什么）
 
@@ -98,6 +194,26 @@ IP地址由一串32比特的数字组成，8比特为一组，转为十进制后
 消息先经过子网中的集线器，转发到最近的路由器，再传递到下一个路由器（通过集线器进行中转），最后由子网中的集线器传递给服务器。
 
 浏览器将服务器IP地址和消息委托给操作系统，操作系统根据IP地址将消息发送给服务器。
+
+
+
+##### 第二章 协议栈、网卡
+
+1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
